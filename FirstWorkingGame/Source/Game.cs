@@ -15,7 +15,7 @@ namespace FirstWorkingGame.Source
         private FreeFlyCamera _camera;
         private bool _rightMouseDown = false;
         private Vector2 _lastMousePos;
-        private List<GameObject> _objects;
+        private List<AnimatedGameObject> _objects;
 
         public Game(int width, int height, string title)
             : base(
@@ -42,26 +42,23 @@ namespace FirstWorkingGame.Source
             var baseDir = Path.GetDirectoryName(typeof(Game).Assembly.Location);
 
             _shader = new Shader(
-                Path.Combine(baseDir, "Assets", "Shaders", "shader.vert"),
-                Path.Combine(baseDir, "Assets", "Shaders", "shader.frag"));
+                AssetPaths.Shaders("shader.vert"),
+                AssetPaths.Shaders("shader.frag"));
 
-            var triangle3dPath = Path.Combine(baseDir, "Assets", "Models", "GLTF", "nave.gltf");
-
-            _objects = new List<GameObject>
+            _objects = new List<AnimatedGameObject>
         {
-            new GameObject(
-                path: Path.Combine(baseDir, "Assets", "Models", "GLTF", "nave.gltf"),
+            new AnimatedGameObject(
+                path: AssetPaths.GltfCharacters("Barbarian.glb"),
                 shader: _shader,
                 position: new Vector3(0, 0, 0),
                 scale:    new Vector3(0.5f)
             ),
-            new GameObject(
-                path: Path.Combine(baseDir, "Assets", "Models", "GLTF", "nave.gltf"),
+            new AnimatedGameObject(
+                path: AssetPaths.GltfCharacters("Knight.glb"),
                 shader: _shader,
-                position: new Vector3(10, 0, 0),
+                position: new Vector3(100, 100, 100),
                 scale:    new Vector3(0.7f)
             ),
-            // add as many as you like…
         };
 
 
@@ -138,16 +135,6 @@ namespace FirstWorkingGame.Source
 
             foreach (var obj in _objects)
             {
-                // Compute per-object matrices
-                var model = obj.WorldMatrix;
-                _shader.SetMatrix4("uModel", model);
-
-                // Normal matrix = (model³³)⁻ᵀ
-                var nm = new Matrix3(model);
-                nm.Invert();
-                nm.Transpose();
-                _shader.SetMatrix3("uNormalMatrix", nm);
-
                 obj.Render(view, proj);
             }
 
@@ -159,6 +146,11 @@ namespace FirstWorkingGame.Source
 
             // how much time has passed since last update:
             float deltaTime = (float)e.Time;
+            foreach (var obj in _objects)
+            {
+                obj.Update(deltaTime);
+            }
+
 
             // grab the current keyboard state:
             var input = KeyboardState;
