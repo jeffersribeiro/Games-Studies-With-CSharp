@@ -4,7 +4,7 @@ using System.Linq;
 using SharpGLTF.Schema2;
 using SharpGLTF.Geometry;
 
-namespace GameStudiesWithCSharp.FirstWorkingGame.Source
+namespace FirstWorkingGame.Source
 {
     public static class GltfMeshLoader
     {

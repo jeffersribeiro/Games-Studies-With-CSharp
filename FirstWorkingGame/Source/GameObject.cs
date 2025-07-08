@@ -1,7 +1,7 @@
 using System;
 using OpenTK.Mathematics;
 
-namespace GameStudiesWithCSharp.FirstWorkingGame.Source
+namespace FirstWorkingGame.Source
 {
     public class GameObject : IDisposable
     {

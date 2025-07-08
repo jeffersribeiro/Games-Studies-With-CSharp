@@ -5,7 +5,7 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace GameStudiesWithCSharp.FirstWorkingGame.Source
+namespace FirstWorkingGame.Source
 {
     public class Game : GameWindow
     {

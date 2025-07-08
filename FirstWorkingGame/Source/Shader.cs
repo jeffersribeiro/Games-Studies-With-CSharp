@@ -1,7 +1,7 @@
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 
-namespace GameStudiesWithCSharp.FirstWorkingGame.Source
+namespace FirstWorkingGame.Source
 {
     public class Shader : IDisposable
     {

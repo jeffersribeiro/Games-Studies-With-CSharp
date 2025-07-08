@@ -1,6 +1,6 @@
 using OpenTK.Graphics.OpenGL4;
 
-namespace GameStudiesWithCSharp.FirstWorkingGame.Source
+namespace FirstWorkingGame.Source
 {
     public class Mesh : IDisposable
     {

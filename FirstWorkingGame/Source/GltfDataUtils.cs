@@ -1,6 +1,6 @@
 using glTFLoader.Schema;
 
-namespace GameStudiesWithCSharp.FirstWorkingGame.Source
+namespace FirstWorkingGame.Source
 {
     public static class GltfDataUtils
     {

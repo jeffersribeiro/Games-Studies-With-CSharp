@@ -1,7 +1,7 @@
 ﻿using System;
-using GameStudiesWithCSharp.FirstWorkingGame.Source;
+using FirstWorkingGame.Source;
 
-namespace GameStudiesWithCSharp.FirstWorkingGame
+namespace FirstWorkingGame
 {
     class Program
     {
