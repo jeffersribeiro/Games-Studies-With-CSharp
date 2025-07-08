@@ -68,6 +68,20 @@ namespace FirstWorkingGame.Source
             GL.Uniform3(location, v);
         }
 
+        public void SetMatrix3(string name, Matrix3 m)
+        {
+            int loc = GL.GetUniformLocation(_handle, name);
+            if (loc < 0) throw new Exception($"Uniform '{name}' not found");
+            GL.UniformMatrix3(loc, false, ref m);
+        }
+
+        public void SetFloat(string name, float f)
+        {
+            int loc = GL.GetUniformLocation(_handle, name);
+            if (loc < 0) throw new Exception($"Uniform '{name}' not found");
+            GL.Uniform1(loc, f);
+        }
+
 
         public void Dispose()
         {

@@ -25,8 +25,13 @@ namespace FirstWorkingGame.Source
 
             // posição no location = 0
             GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false,
+                                   6 * sizeof(float), 0);
 
+            GL.EnableVertexAttribArray(1);
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false,
+                                   6 * sizeof(float),
+                                   3 * sizeof(float));
             // EBO
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, _ebo);
             GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);

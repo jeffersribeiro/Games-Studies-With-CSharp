@@ -47,18 +47,32 @@ namespace FirstWorkingGame.Source
                              ?? throw new InvalidOperationException("POSITION attribute missing");
             var positions = posAccessor.AsVector3Array();   // Vector3[]
 
+            var normAccessor = prim.GetVertexAccessor("NORMAL")
+                   ?? throw new InvalidOperationException("NORMAL attribute missing");
+            var normals = normAccessor.AsVector3Array(); // Vector3[]
+
             // 6) Extract indices
             var idxAccessor = prim.IndexAccessor
                             ?? throw new InvalidOperationException("Indices accessor missing");
             var indices = idxAccessor.AsIndicesArray();     // int[]
 
-            // 7) Flatten to float[]/uint[]
-            float[] vertices = positions
-                               .SelectMany(v => new[] { v.X, v.Y, v.Z })
-                               .ToArray();
             uint[] indexBuf = indices
                                .Select(i => (uint)i)
                                .ToArray();
+
+            int vertCount = positions.Count;
+            float[] vertices = new float[vertCount * 6];
+            for (int i = 0; i < vertCount; i++)
+            {
+                var p = positions[i];
+                var n = normals[i];
+                vertices[i * 6 + 0] = p.X;
+                vertices[i * 6 + 1] = p.Y;
+                vertices[i * 6 + 2] = p.Z;
+                vertices[i * 6 + 3] = n.X;
+                vertices[i * 6 + 4] = n.Y;
+                vertices[i * 6 + 5] = n.Z;
+            }
 
             // 8) Return your engine‐Mesh
             return new Mesh(vertices, indexBuf);

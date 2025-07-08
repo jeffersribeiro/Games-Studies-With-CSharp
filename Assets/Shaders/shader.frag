@@ -2,33 +2,38 @@
 
 in vec3 FragPos;
 in vec3 Normal;
-in vec2 TexCoord;
 
 out vec4 FragColor;
 
-uniform sampler2D uTexture;
 uniform vec3 uLightPos;
 uniform vec3 uViewPos;
 
+uniform vec3 uLightAmbient;   // e.g. vec3(0.1)
+uniform vec3 uLightDiffuse;   // e.g. vec3(0.8)
+uniform vec3 uLightSpecular;  // e.g. vec3(1.0)
+
+uniform vec3 uMaterialAmbient;   // often same as object color * some factor
+uniform vec3 uMaterialDiffuse;   // base object color
+uniform vec3 uMaterialSpecular;  // specular color, often vec3(1.0)
+uniform float uMaterialShininess; // e.g. 32.0
+
 void main()
 {
-    // Normalize vectors
-    vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(uLightPos - FragPos);
-    vec3 viewDir = normalize(uViewPos - FragPos);
-
     // Ambient
-    vec3 ambient = 0.1 * texture(uTexture, TexCoord).rgb;
+    vec3 ambient = uLightAmbient * uMaterialAmbient;
 
     // Diffuse
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(uLightPos - FragPos);
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = diff * texture(uTexture, TexCoord).rgb;
+    vec3 diffuse = uLightDiffuse * (diff * uMaterialDiffuse);
 
-    // Specular
-    vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
-    vec3 specular = vec3(0.3) * spec;
+    // Specular (Blinn–Phong)
+    vec3 viewDir = normalize(uViewPos - FragPos);
+    vec3 halfDir = normalize(lightDir + viewDir);
+    float spec = pow(max(dot(norm, halfDir), 0.0), uMaterialShininess);
+    vec3 specular = uLightSpecular * (spec * uMaterialSpecular);
 
-    vec3 result = ambient + diffuse + specular;
-    FragColor = vec4(result, 1.0);
+    vec3 color = ambient + diffuse + specular;
+    FragColor = vec4(color, 1.0);
 }

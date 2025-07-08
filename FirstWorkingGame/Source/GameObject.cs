@@ -18,13 +18,13 @@ namespace FirstWorkingGame.Source
         /// <summary>
         /// Fábrica que cria um GameObject a partir de um arquivo glTF
         /// </summary>
-        public static GameObject LoadFromGltf(string path, Shader shader, string name = null)
+        public GameObject(string path, Shader shader, Vector3 position, Vector3 scale, string name = null)
         {
-            var go = new GameObject();
-            go.Name = name ?? System.IO.Path.GetFileNameWithoutExtension(path);
-            go._shader = shader;
-            go._mesh = GltfMeshLoader.LoadFromFile(path);
-            return go;
+            Position = position;
+            Scale = scale;
+            Name = name ?? Path.GetFileNameWithoutExtension(path);
+            _shader = shader;
+            _mesh = GltfMeshLoader.LoadFromFile(path);
         }
 
         /// <summary>
