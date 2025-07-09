@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="glTF2Loader" Version="1.0.0" />
     <PackageReference Include="glTFLoader" Version="1.0.0.3" />
     <PackageReference Include="OpenTK" Version="4.9.4" />
     <PackageReference Include="SharpGLTF.Core" Version="1.0.4" />
     <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.4" />
-    <PackageReference Include="VulkanSharp" Version="0.1.10" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+
   </ItemGroup>
 
   <ItemGroup>

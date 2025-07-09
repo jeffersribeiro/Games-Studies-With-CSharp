@@ -39,8 +39,6 @@ namespace FirstWorkingGame.Source
             GL.Enable(EnableCap.DepthTest);
             GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
 
-            var baseDir = Path.GetDirectoryName(typeof(Game).Assembly.Location);
-
             _shader = new Shader(
                 AssetPaths.Shaders("shader.vert"),
                 AssetPaths.Shaders("shader.frag"));
@@ -51,13 +49,13 @@ namespace FirstWorkingGame.Source
                 path: AssetPaths.GltfCharacters("Barbarian.glb"),
                 shader: _shader,
                 position: new Vector3(0, 0, 0),
-                scale:    new Vector3(0.5f)
+                scale:    new Vector3(1f)
             ),
             new AnimatedGameObject(
                 path: AssetPaths.GltfCharacters("Knight.glb"),
                 shader: _shader,
-                position: new Vector3(100, 100, 100),
-                scale:    new Vector3(0.7f)
+                position: new Vector3(10, 0, 0),
+                scale:    new Vector3(1f)
             ),
         };
 

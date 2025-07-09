@@ -2,6 +2,8 @@
 
 in vec3 FragPos;
 in vec3 Normal;
+in vec2 vUV;
+uniform sampler2D uBaseColorTexture;
 
 out vec4 FragColor;
 

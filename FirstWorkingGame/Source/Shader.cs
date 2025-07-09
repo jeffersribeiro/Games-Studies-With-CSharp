@@ -82,10 +82,25 @@ namespace FirstWorkingGame.Source
             GL.Uniform1(loc, f);
         }
 
+        public void SetVector4(string name, Vector4 v)
+        {
+            int loc = GL.GetUniformLocation(_handle, name);
+            if (loc < 0) throw new Exception($"Uniform '{name}' not found");
+            GL.Uniform4(loc, v);
+        }
+
+        public void SetInt(string name, int value)
+        {
+            int loc = GL.GetUniformLocation(_handle, name);
+            if (loc < 0)
+                throw new Exception($"Uniform '{name}' not found");
+            GL.Uniform1(loc, value);
+        }
 
         public void Dispose()
         {
             GL.DeleteProgram(_handle);
         }
+
     }
 }

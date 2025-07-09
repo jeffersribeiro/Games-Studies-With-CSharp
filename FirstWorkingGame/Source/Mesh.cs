@@ -32,6 +32,18 @@ namespace FirstWorkingGame.Source
             GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false,
                                    6 * sizeof(float),
                                    3 * sizeof(float));
+
+            // assuming stride = 8 * sizeof(float):
+            GL.EnableVertexAttribArray(2);
+            GL.VertexAttribPointer(
+                index: 2,
+                size: 2,
+                type: VertexAttribPointerType.Float,
+                normalized: false,
+                stride: 8 * sizeof(float),
+                offset: 6 * sizeof(float)
+            );
+
             // EBO
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, _ebo);
             GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
