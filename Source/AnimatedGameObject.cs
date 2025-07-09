@@ -67,34 +67,7 @@ namespace FirstWorkingGame.Source
             {
                 foreach (var prim in node.Mesh.Primitives)
                 {
-                    // POSITION
-                    var posAcc = prim.GetVertexAccessor("POSITION")
-                                 ?? throw new InvalidOperationException("POSITION attribute missing");
-                    var positions = posAcc.AsVector3Array();
-
-                    // NORMAL
-                    var normAcc = prim.GetVertexAccessor("NORMAL")
-                                  ?? throw new InvalidOperationException("NORMAL attribute missing");
-                    var normals = normAcc.AsVector3Array();
-
-                    // INDICES
-                    var idxAcc = prim.IndexAccessor
-                                ?? throw new InvalidOperationException("Index accessor missing");
-                    var indices = idxAcc.AsIndicesArray();
-
-                    float[] vertices = new float[positions.Count * 6];
-                    for (int i = 0; i < positions.Count; i++)
-                    {
-                        vertices[6 * i + 0] = positions[i].X;
-                        vertices[6 * i + 1] = positions[i].Y;
-                        vertices[6 * i + 2] = positions[i].Z;
-                        vertices[6 * i + 3] = normals[i].X;
-                        vertices[6 * i + 4] = normals[i].Y;
-                        vertices[6 * i + 5] = normals[i].Z;
-                    }
-                    uint[] idxBuf = indices.Select(i => (uint)i).ToArray();
-
-                    var mesh = new Mesh(vertices, idxBuf);
+                    var mesh = prim.ToEngineMesh();
 
                     _nodeMeshes.Add((node, mesh));
                 }
