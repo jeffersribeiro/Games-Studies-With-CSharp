@@ -1,8 +1,4 @@
-using System;
-using System.IO;
-using System.Linq;
 using SharpGLTF.Schema2;
-using SharpGLTF.Geometry;
 
 namespace FirstWorkingGame.Source
 {
