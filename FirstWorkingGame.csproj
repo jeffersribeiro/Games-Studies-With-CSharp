@@ -8,17 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AssimpNet" Version="4.1.0" />
     <PackageReference Include="OpenTK" Version="4.9.4" />
-    <PackageReference Include="SharpGLTF.Core" Version="1.0.4" />
-    <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.4" />
-    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-
+    <PackageReference Include="StbImageSharp" Version="2.30.15" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Assets\**\*"
-      CopyToOutputDirectory="PreserveNewest"
-      Link="Assets\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="Assets\**\*" CopyToOutputDirectory="PreserveNewest" Link="Assets\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>
