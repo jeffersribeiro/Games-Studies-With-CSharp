@@ -40,7 +40,7 @@ public sealed class Game : GameWindow
         CursorState = CursorState.Grabbed;
 
         _shader = new Shader("Shaders/anim_model.vs", "Shaders/anim_model.fs");
-        _camera = new Camera(new Vector3(0, 0, 3));
+        _camera = new Camera(new Vector3(0, 0, 0));
 
         // >>> AJUSTE AQUI: caminho para o root do LearnOpenGL (onde existe "resources/...")
         // Ex: @"C:\...\LearnOpenGL\"
@@ -116,7 +116,7 @@ public sealed class Game : GameWindow
 
         var model = Matrix4.Identity;
         model *= Matrix4.CreateTranslation(0f, -0.4f, 0f);
-        model *= Matrix4.CreateScale(0.5f);
+        model *= Matrix4.CreateScale(0.05f);
 
         _shader.SetMatrix4("model", model);
 
